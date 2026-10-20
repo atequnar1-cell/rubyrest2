@@ -1,0 +1,8 @@
+# Ruby Rest 2
+
+- There is no need to install dependencies for the MVP.
+- For browser usage, open `index.html` directly or serve via a local web server.
+
+```bash
+python3 -m http.server 8000
+```

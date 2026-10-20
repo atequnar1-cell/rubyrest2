@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruby Rest 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="authScreen" class="screen active">
+      <div class="auth-shell">
+        <div class="brand-block">
+          <div class="brand-mark">R</div>
+          <h1>Ruby Rest 2</h1>
+          <p>VIP membership dashboard</p>
+        </div>
+
+        <div class="auth-card">
+          <div class="auth-tabs">
+            <button class="tab active" data-mode="login" type="button">Login</button>
+            <button class="tab" data-mode="register" type="button">Register</button>
+          </div>
+
+          <form id="authForm">
+            <div class="field hidden" id="nameField">
+              <label for="nameInput">Full name</label>
+              <input id="nameInput" type="text" placeholder="Your full name" />
+            </div>
+
+            <div class="field">
+              <label for="emailInput">Email</label>
+              <input id="emailInput" type="email" placeholder="you@example.com" required />
+            </div>
+
+            <div class="field">
+              <label for="passwordInput">Password</label>
+              <input id="passwordInput" type="password" placeholder="••••••••" required />
+            </div>
+
+            <div class="field hidden" id="referralField">
+              <label for="referralInput">Referral code</label>
+              <input id="referralInput" type="text" placeholder="Optional referral code" />
+            </div>
+
+            <button type="submit" class="primary-btn" id="authSubmitBtn">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="appScreen" class="screen">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="brand-mark small">R</div>
+          <div>
+            <h2>Ruby Rest 2</h2>
+            <small>VIP platform</small>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-btn active" data-view="dashboardView">Dashboard</button>
+          <button class="nav-btn" data-view="plansView">VIP Plans</button>
+          <button class="nav-btn" data-view="transactionsView">Transactions</button>
+          <button class="nav-btn admin-only hidden" data-view="adminView">Admin</button>
+        </nav>
+
+        <div class="user-card">
+          <strong id="sidebarUserName">User</strong>
+          <span id="sidebarUserEmail">email@example.com</span>
+          <small id="sidebarVipLevel">VIP 0</small>
+        </div>
+
+        <button id="logoutBtn" class="secondary-btn">Logout</button>
+      </aside>
+
+      <main class="content">
+        <section id="dashboardView" class="view active">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Welcome back</p>
+              <h3 id="welcomeName">Member dashboard</h3>
+            </div>
+            <div class="balance-pill">
+              <span>Balance</span>
+              <strong id="userBalance">$0.00</strong>
+            </div>
+          </header>
+
+          <div class="summary-grid">
+            <div class="stat-card gold">
+              <span>Current VIP</span>
+              <strong id="summaryVipLevel">VIP 0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Referral bonus</span>
+              <strong id="summaryReferral">$0.00</strong>
+            </div>
+            <div class="stat-card">
+              <span>Daily claim</span>
+              <strong id="summaryDailyClaim">$0.00</strong>
+            </div>
+            <div class="stat-card">
+              <span>Approved deposits</span>
+              <strong id="summaryApprovedDeposits">$0.00</strong>
+            </div>
+          </div>
+
+          <div class="panel-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <h4>Quick actions</h4>
+              </div>
+
+              <div class="quick-actions">
+                <div class="action-box">
+                  <label for="depositAmount">Deposit</label>
+                  <input id="depositAmount" type="number" min="10" step="10" placeholder="100" />
+                  <button class="primary-btn small" id="depositBtn">Submit request</button>
+                </div>
+
+                <div class="action-box">
+                  <label for="withdrawalAmount">Withdrawal</label>
+                  <input id="withdrawalAmount" type="number" min="10" step="10" placeholder="100" />
+                  <button class="secondary-btn small" id="withdrawalBtn">Request payout</button>
+                </div>
+
+                <div class="action-box">
+                  <label>Daily profit</label>
+                  <button class="gold-btn small" id="claimDailyBtn">Claim today</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h4>Referral stats</h4>
+              </div>
+              <div class="referral-box">
+                <p>Your referral code</p>
+                <strong id="referralCodeDisplay">loading...</strong>
+                <p id="referralSummaryText">No invited members yet.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="plansView" class="view">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Membership</p>
+              <h3>VIP pricing plans</h3>
+            </div>
+          </header>
+          <div id="plansContainer" class="plan-grid"></div>
+        </section>
+
+        <section id="transactionsView" class="view">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">History</p>
+              <h3>Wallet activity</h3>
+            </div>
+          </header>
+
+          <div class="panel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="adminView" class="view">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Control panel</p>
+              <h3>Pending approvals</h3>
+            </div>
+          </header>
+
+          <div class="panel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Level</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adminTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
